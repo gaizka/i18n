@@ -298,6 +298,11 @@ class I18nSimpleBackendInterpolateTest < Test::Unit::TestCase
   def test_interpolate_given_a_string_containing_a_reserved_key_raises_reserved_interpolation_key
     assert_raises(I18n::ReservedInterpolationKey) { @backend.send(:interpolate, nil, '{{default}}', {:default => nil}) }
   end
+
+  def test_interpolate_given_a_string_containing_escaped_interpolation
+    assert_equal 'file test.txt opened by {{user}}', @backend.send(:interpolate, nil, 
+      "file {{file}} opened by \\\\{{user}}", {:file => 'test.txt', :user => 'Mr. X'})
+  end
   
   private
   

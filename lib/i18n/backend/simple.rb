@@ -155,7 +155,7 @@ module I18n
             escaped, pattern, key = $1, $2, $2.to_sym
 
             if escaped
-              pattern
+              '{{' + pattern + '}}'
             elsif INTERPOLATION_RESERVED_KEYS.include?(pattern)
               raise ReservedInterpolationKey.new(pattern, string)
             elsif !values.include?(key)
